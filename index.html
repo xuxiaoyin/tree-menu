@@ -128,11 +128,11 @@
 	});
 	
 	Vue.component('menu-list',{
-		data:function(){
-				return{
-					statu:false
-				}
-		},
+//		data:function(){
+//				return{
+//					statu:false
+//				}
+//		},
 		props:{
 			data:{
 				type:Array,
@@ -154,38 +154,31 @@
 			
 		},
 		template:`<ul>
-                <li v-for="(item,index) of data">
-                    <div class="tree-title" :style='[stylePadding]'   @click="statu=!statu">
+                <li v-for="item of data">
+                    <div class="tree-title" :style='[stylePadding]'   @click="item.statu=!item.statu">
                     	<span><strong>{{item.title}}</strong> <i class="ico"></i></span>
                     </div>
                     <menu-list 
                     	v-if="item.children" 
                     	v-bind:data="item.children"
                     	v-bind:count="increcount"
-                    	v-show="statu"
+                    	v-show="item.statu"
                     >
                     </menu-list>
                 </li>
-            </ul>`,
-        methods:{
-//      	changeHandel:function(event){
-//      		console.log(event)
-//      		event.target.statu=!event.target.statu
-        		
-        	}
-        }
+            </ul>`
 	})
 	
 	var menuList=[{
-		title:'目录',children:[{
-			title:'我的音乐',children:[{
+		title:'目录',statu:false,children:[{
+			title:'我的音乐',statu:false,children:[{
 				title:'五月天'
 			}]
 		}]
 	},{
-		title:'学习',children:[{
-			title:'前端',children:[{
-				title:'Javascript',children:[{
+		title:'学习',statu:false,children:[{
+			title:'前端',statu:false,children:[{
+				title:'Javascript',statu:false,children:[{
 					title:'ES6'
 				},{
 					title:'VUE'
